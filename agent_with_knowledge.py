@@ -63,7 +63,8 @@ agent = Agent(
             - 鼓励和支持所有技能水平的家庭厨师\
 """),
     knowledge=PDFUrlKnowledgeBase(
-        urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+        urls=["https://media.doterra.com/us/zh/ebooks/%E6%96%99%E7%90%86%E8%A4%87%E6%96%B9%E5%A5%97%E8%A3%9D%E9%A3%9F%E8%AD%9C-cuisine-blends-collection-cookbook.pdf"],
+        #https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
         vector_db=LanceDb(
             uri="tmp/lancedb",
             table_name="recipe_knowledge",

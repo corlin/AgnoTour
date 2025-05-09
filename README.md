@@ -21,12 +21,11 @@ export XAI_API_KEY=your_api_key_here
 
 # 安装依赖项
 pip install -r requirements.txt
-pip install openai lancedb tantivy pypdf duckduckgo-search agno
 ```
 
 ## 使用方法
 
-项目包含两个主要脚本，您可以运行它们来体验不同的功能：
+项目包含四个主要脚本，您可以运行它们来体验不同的功能：
 
 - **基本文本生成**：运行 `basic.py` 脚本，使用 xAI 模型生成文本内容。
   
@@ -38,6 +37,18 @@ pip install openai lancedb tantivy pypdf duckduckgo-search agno
   
   ```bash
   python xai/tools_use.py
+  ```
+
+- **带知识的代理**：运行 `agent_with_knowledge.py` 脚本，使用 xAI 模型结合知识库进行文本生成。
+  
+  ```bash
+  python agent_with_knowledge.py
+  ```
+
+- **带工具的代理**：运行 `agent_with_tools.py` 脚本，使用 xAI 模型结合工具进行信息搜索。
+  
+  ```bash
+  python agent_with_tools.py
   ```
 
 ## 贡献
