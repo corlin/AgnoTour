@@ -20,8 +20,8 @@ AgnoTour 是一个实验性项目，旨在探索和展示 xAI 模型（特别是
 export XAI_API_KEY=your_api_key_here
 
 # 安装依赖项
-pip install -U openai agno
-pip install -U duckduckgo-search
+pip install -r requirements.txt
+pip install openai lancedb tantivy pypdf duckduckgo-search agno
 ```
 
 ## 使用方法

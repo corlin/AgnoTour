@@ -30,6 +30,8 @@ ENV/
 .vscode/
 *.swp
 *.swo
+tmp/
+docs/
 
 # Environment variables
 .env
