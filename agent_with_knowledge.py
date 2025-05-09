@@ -1,11 +1,11 @@
 from textwrap import dedent
 
 from agno.agent import Agent
-from agno.embedder.openai import OpenAIEmbedder
+from agno.embedder.mistral import MistralEmbedder#OpenAIEmbedder
 from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
 from agno.models.openai import OpenAIChat
 from agno.tools.duckduckgo import DuckDuckGoTools
-from agno.vectordb.lancedb import LanceDb, SearchType
+from agno.vectordb.qdrant import Qdrant#, SearchType
 
 from os import getenv
 
@@ -65,16 +65,17 @@ agent = Agent(
     knowledge=PDFUrlKnowledgeBase(
         urls=["https://media.doterra.com/us/zh/ebooks/%E6%96%99%E7%90%86%E8%A4%87%E6%96%B9%E5%A5%97%E8%A3%9D%E9%A3%9F%E8%AD%9C-cuisine-blends-collection-cookbook.pdf"],
         #https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
-        vector_db=LanceDb(
-            uri="tmp/lancedb",
-            table_name="recipe_knowledge",
-            search_type=SearchType.hybrid,
-            embedder=OpenAIEmbedder(
-                id="mistral-embed",
-                #"Pro/BAAI/bge-m3",
-                base_url="https://api.mistral.ai/v1",#"https://api.siliconflow.cn/v1",
-                api_key=getenv("EMB_MIS_URL")
-                ),
+            vector_db=Qdrant(
+                url="localhost:6333",
+                collection="recipe_knowledge",
+                #check_compatibility=False,
+                prefer_grpc=True ,
+                #search_type=SearchType.hybrid,
+                embedder=MistralEmbedder(
+                    id="mistral-embed",
+                    #base_url="https://api.mistral.ai/v1",
+                    api_key=getenv("EMB_MIS_URL")
+                    ),
         ),
     ),
     tools=[DuckDuckGoTools()],

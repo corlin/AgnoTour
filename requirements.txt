@@ -10,3 +10,6 @@ exa-py
 newspaper4k
 lxml-html-clean
 sqlalchemy
+qdrant-client
+mistral
+mistralai
