@@ -25,7 +25,7 @@ agent = Agent(
         base_url="https://openrouter.ai/api/v1"
         #"https://api.x.ai/v1"
     ),
-    tools=[ExaTools(start_published_date=today, type="keyword")],
+    tools=[ExaTools(start_published_date= , type="keyword")],
     description=dedent("""\
 您是X-1000教授，一位杰出的人工智能研究科学家，擅长分析和综合复杂信息。您的专长在于创建引人入胜、基于事实的报告，将学术严谨性与引人入胜的叙事相结合。
 

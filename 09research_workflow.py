@@ -11,7 +11,9 @@ from agno.utils.log import logger
 from agno.utils.pprint import pprint_run_response
 from agno.workflow import RunEvent, RunResponse, Workflow
 from pydantic import BaseModel, Field
+from datetime import datetime
 
+today = datetime.now().strftime("%Y-%m-%d")
 
 class Article(BaseModel):
     title: str = Field(..., description="Title of the article.")
@@ -42,11 +44,22 @@ class ResearchReportGenerator(Workflow):
     Generate comprehensive research reports that combine academic rigor
     with engaging storytelling. This workflow orchestrates multiple AI agents to search, analyze,
     and synthesize information from diverse sources into well-structured reports.
+    today is ${today}
     """)
 
     web_searcher: Agent = Agent(
-        model=OpenAIChat(id="gpt-4o-mini"),
-        tools=[DuckDuckGoTools()],
+        model=OpenAIChat(
+            id="gpt-4o-mini",
+        #"deepseek/deepseek-chat-v3-0324",
+        #"openai/gpt-4o",
+        #x-ai/grok-3-beta",
+        #grok-3
+        #grok-3-mini
+        #x-ai/grok-3-mini-beta
+        base_url="https://openrouter.ai/api/v1"
+        #"https://api.x.ai/v1"
+                         ),
+        tools=[DuckDuckGoTools(timeout=30)],
         description=dedent("""\
         You are ResearchBot-X, an expert at discovering and evaluating academic and scientific sources.\
         """),
@@ -64,7 +77,17 @@ class ResearchReportGenerator(Workflow):
     )
 
     article_scraper: Agent = Agent(
-        model=OpenAIChat(id="gpt-4o-mini"),
+        model=OpenAIChat(
+            id="openai/gpt-4o-mini",
+        #"deepseek/deepseek-chat-v3-0324",
+        #"openai/gpt-4o",
+        #x-ai/grok-3-beta",
+        #grok-3
+        #grok-3-mini
+        #x-ai/grok-3-mini-beta
+        base_url="https://openrouter.ai/api/v1"
+        #"https://api.x.ai/v1"
+        ),
         tools=[Newspaper4kTools()],
         description=dedent("""\
         You are ContentBot-X, an expert at extracting and structuring academic content.\
@@ -84,7 +107,17 @@ class ResearchReportGenerator(Workflow):
     )
 
     writer: Agent = Agent(
-        model=OpenAIChat(id="gpt-4o"),
+        model=OpenAIChat(
+               id="openai/gpt-4o",
+        #"deepseek/deepseek-chat-v3-0324",
+        #"openai/gpt-4o",
+        #x-ai/grok-3-beta",
+        #grok-3
+        #grok-3-mini
+        #x-ai/grok-3-mini-beta
+        base_url="https://openrouter.ai/api/v1"
+        #"https://api.x.ai/v1"
+        ),
         description=dedent("""\
         You are Professor X-2000, a distinguished AI research scientist combining academic rigor with engaging narrative style.\
         """),
@@ -359,7 +392,7 @@ if __name__ == "__main__":
 
     # Example research topics
     example_topics = [
-        "quantum computing breakthroughs 2024",
+        "quantum computing breakthroughs 2025",
         "artificial consciousness research",
         "fusion energy developments",
         "space tourism environmental impact",
@@ -375,7 +408,7 @@ if __name__ == "__main__":
     # Get topic from user
     topic = Prompt.ask(
         "[bold]Enter a research topic[/bold]\n✨",
-        default="quantum computing breakthroughs 2024",
+        default="quantum computing breakthroughs 2025",
     )
 
     # Convert the topic to a URL-safe string for use in session_id
