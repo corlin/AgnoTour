@@ -30,11 +30,11 @@ def main() -> None:
     # App header
     ####################################################################
     st.markdown(
-        "<h1 class='main-title'>SQrL: Text2SQL Reasoning Agent</h1>",
+        "<h1 class='main-title'>Text2SQL 推理代理服务</h1>",
         unsafe_allow_html=True,
     )
     st.markdown(
-        "<p class='subtitle'>SQrL is an intelligent SQL Agent that can think, analyze and reason, powered by Agno</p>",
+        "<p class='subtitle'>一个智能的 SQL 代理，能够思考、分析和推理，由 Agno 提供支持。</p>",
         unsafe_allow_html=True,
     )
 
@@ -50,7 +50,7 @@ def main() -> None:
         "gpt-4o": "openai:openai/gpt-4o",
     }
     selected_model = st.sidebar.selectbox(
-        "Select a model",
+        "选择模型",
         options=list(model_options.keys()),
         index=0,
         key="model_selector",

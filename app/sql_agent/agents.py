@@ -74,16 +74,16 @@ agent_knowledge = CombinedKnowledgeBase(
         JSONKnowledgeBase(path=knowledge_dir),
     ],
     # Store agent knowledge in the ai.sql_agent_knowledge table
-        vector_db=PgVector(
-            db_url=db_url,
-            table_name="sql_agent_knowledge",
-            schema="ai",
-            # Use Mistral embeddings
-            embedder=OllamaEmbedder(
-                id="bge-m3",
-                dimensions=1024
-                ),
-        ),
+    vector_db=PgVector(
+        db_url=db_url,
+        table_name="sql_agent_knowledge",
+        schema="ai",
+        # Use Mistral embeddings
+        embedder=OllamaEmbedder(
+            #id="bge-m3",
+            #dimensions=1024
+            ),
+    ),
     # 5 references are added to the prompt
     num_documents=5,
 )

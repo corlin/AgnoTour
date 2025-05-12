@@ -118,7 +118,7 @@ def display_tool_calls(tool_calls_container, tools):
 def sidebar_widget() -> None:
     """Display a sidebar with sample user queries"""
     with st.sidebar:
-        st.markdown("#### 🏆 Sample Queries")
+        st.markdown("#### 🏆 查询示例")
         if st.button("📋 Show Tables"):
             add_message("user", "Which tables do you have access to?")
         if st.button("🥇 Most Race Wins"):
@@ -142,24 +142,24 @@ def sidebar_widget() -> None:
             )
 
         st.markdown("---")
-        st.markdown("#### 🛠️ Utilities")
+        st.markdown("#### 🛠️ 工具")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("🔄 New Chat"):
+            if st.button("🔄 新会话"):
                 restart_agent()
         with col2:
             fn = "sql_agent_chat_history.md"
             if "sql_agent_session_id" in st.session_state:
                 fn = f"sql_agent_{st.session_state.sql_agent_session_id}.md"
             if st.download_button(
-                "💾 Export Chat",
+                "💾 导出会话",
                 export_chat_history(),
                 file_name=fn,
                 mime="text/markdown",
             ):
                 st.sidebar.success("Chat history exported!")
 
-        if st.sidebar.button("🚀 Load Data & Knowledge"):
+        if st.sidebar.button("🚀 加载数据和知识库"):
             load_data_and_knowledge()
 
 
@@ -181,7 +181,7 @@ def session_selector_widget(agent: Agent, model_id: str) -> None:
 
         # Display session selector
         selected_session = st.sidebar.selectbox(
-            "Session",
+            "会话",
             options=[s["display"] for s in session_options],
             key="session_selector",
         )
@@ -213,13 +213,13 @@ def rename_session_widget(agent: Agent) -> None:
     with session_row[0]:
         if st.session_state.session_edit_mode:
             new_session_name = st.text_input(
-                "Session Name",
+                "会话名称",
                 value=agent.session_name,
                 key="session_name_input",
                 label_visibility="collapsed",
             )
         else:
-            st.markdown(f"Session Name: **{agent.session_name}**")
+            st.markdown(f"会话名称: **{agent.session_name}**")
 
     with session_row[1]:
         if st.session_state.session_edit_mode:
@@ -236,16 +236,9 @@ def rename_session_widget(agent: Agent) -> None:
 def about_widget() -> None:
     """Display an about section in the sidebar"""
     with st.sidebar:
-        st.markdown("### About Agno ✨")
-        st.markdown("""
-        Agno is a lightweight library for building Reasoning Agents.
-
-        [GitHub](https://github.com/agno-agi/agno) | [Docs](https://docs.agno.com)
-        """)
-
-        st.markdown("### Need Help?")
+        st.markdown("### 需要帮助?")
         st.markdown(
-            "If you have any questions, catch us on [discord](https://agno.link/discord) or post in the community [forum](https://agno.link/community)."
+            "If you have any questions, catch us on [discord](https://agno.link/discord) ."
         )
 
 
